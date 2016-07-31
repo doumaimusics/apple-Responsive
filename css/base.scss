@@ -1,0 +1,245 @@
+body,form,input,textarea,ul,ol,li,h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+	position: relative;
+   list-style:none;
+}
+body{
+	font-family:"Helvetica Neue","微软雅黑"，sans-serif;
+    font-size: 15px;
+    /*overflow:hidden;*/
+}
+img{
+	border:none;
+}
+a{
+	text-decoration:none;
+
+}
+
+@mixin zuoyou{   /* 左右定位 */
+	position:absolute;
+	left: 0;
+	right: 0;
+	margin:auto;
+}
+
+@mixin zhong{
+	position:absolute;
+	left:0;
+	top:0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+}
+
+@mixin shangxia{     /* 上下定位 */
+	position:absolute;
+	bottom:0;
+	top:0;
+	margin:auto;
+}
+
+@mixin gai{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top:0;
+}
+
+@mixin cube($size){   /* 方块 */
+   width:$size;
+   height:$size;
+}
+
+%clear{ /*  对浮动的清理 */
+	content:'';
+	display:block;
+	clear:both;
+	line-height: 0;
+	height: 0;
+}
+
+.cleartfix::after{  /* //定义一个清除浮动的类 */
+  @extend %clear;
+}
+
+
+/*栅格系统*/
+
+$medium-size:1068px;
+$small-size:768px;
+
+@mixin onm{
+	@media screen and (max-width: $medium-size){
+		@content;
+	}
+}
+
+@mixin ons{
+	@media screen and (max-width: $small-size){
+		@content;
+	}
+}
+
+.row{
+    &::after{
+    	@extend %clear;
+    }
+}
+
+.col{
+	float: left;
+}
+
+$number : 12;  
+@for $i from 1 through $number{
+   .col.l#{$i}{
+   	width: percentage($i/$number);
+   }
+}
+
+@include onm{
+	@for $i from 1 through $number{
+   .col.m#{$i}{
+   	width: percentage($i/$number);
+   }
+}
+}
+
+@include ons{
+	@for $i from 1 through $number{
+   .col.s#{$i}{
+   	width: percentage($i/$number);
+   }
+}
+}
+///* .icon-journey2shape::before { content: "\e7e8"; }
+//.icon-left::before { content: "\e7f4"; }
+//.icon-attachment::before { content: "\e776"; }
+//.icon-back::before { content: "\e833"; }
+//.icon-camera::before { content: "\e832"; }
+//.icon-share-copy::before { content: "\e82d"; }
+//.icon-more2::before { content: "\e7c2"; }
+//.icon-orderlist::before { content: "\e79d"; }
+//
+//
+//@font-face{
+//	font-family:"wodewenzi";
+//	src:url("../font/appleicons_text.woff")format("woff");	
+//} 
+//
+//.icon{
+//	font-family:"wodewenzi";
+//}
+// */
+@font-face {
+  font-family: "pingguo";
+  src: url(font/iconfont.woff) format("woff");
+}
+@font-face {
+  font-family: "xi";
+  src: url(font/myriad-set-pro_extrathin.woff) format("woff");
+}
+@font-face {
+  font-family: "fangdajing";
+  src: url(font/fangdajing.woff) format("woff");
+}
+@font-face {
+  font-family: "cu";
+  src: url(font/myriad-set-pro_semibold.woff) format("woff");
+}
+@font-face {
+  font-family: "zhengchang";
+  src: url(font/myriad-set-pro_text.woff) format("woff");
+}
+@font-face {
+  font-family: "jixi";
+  src: url(font/myriad-set-pro_thin.woff) format("woff");
+}
+
+.xi{
+  font-family: "xi";
+}
+.cu{
+  font-family: "cu";
+}
+.zhengchang{
+  font-family: "zhengchang";
+}
+.jixi{
+  font-family: "jixi";
+}
+.tubiao{
+  font-family: "pingguo";
+  font-style: normal;
+}
+.guoguo::before{
+  content:"\e6d6";
+}
+.kongguoguo::before{
+  content:"\e60a";
+}
+.guoguo::before{
+  content:"\e6d6";
+}
+.kongguoguo::before{
+  content:"\e60a";
+}
+
+
+
+
+
+@font-face {
+  font-family: "zititubiao";
+  src:url("../font/iconfont.woff") format("woff");
+}
+.iconfont-tubiao{
+  font-family: "zititubiao";
+  font-style: normal;
+}
+
+.icon-pingguo::before{
+  content: "\e6d6";
+}
+.icon-gouwudai::before{
+  content: "\e64b";
+}
+.icon-sousuo::before{
+  content: "\e612";
+}
+@font-face {
+  font-family:"zitijixi";
+  src:url("../font/myriad-set-pro_extrathin.woff") format("woff")
+}
+.xi{
+  font-family: "ziti-jixi";
+  font-style: normal;
+}
+@font-face {
+  font-family:"zitijiacu";
+  src:url("../font/myriad-set-pro_semibold.woff") format("woff")
+}
+.cu{
+  font-family: "zitijiacu";
+  font-style: normal;
+}
+
+@font-face {
+  font-family:"zitizhengc";
+  src:url("../font/myriad-set-pro_text.woff") format("woff")
+}
+.zhengc{
+  font-family: "zitizhengc";
+  font-style: normal;
+}
+@font-face {
+  font-family:"zitixi";
+  src:url("../font/myriad-set-pro_thin.woff") format("woff")
+}
+.jixi{
+  font-family: "zitixi";
+  font-style: normal;
+}

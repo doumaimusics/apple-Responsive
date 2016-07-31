@@ -1,0 +1,962 @@
+@import 'base';
+body{
+    width:100%;
+    overflow-x: hidden;
+}
+.header{
+    width:100%;
+    height: 44px;
+    border-top:1px solid #B6B4B6;
+    z-index: 100;
+    background:#333333;
+    .header-inner{
+        max-width:1024px;    // 最大宽度
+        height: 44px;
+//      border-top:1px solid #f40;
+        margin:0 auto;
+//      padding:0 15px;
+//      background: #f40;
+        box-sizing:border-box;
+        .nav{
+
+            height: 45px;
+            text-align:justify;//均等分开
+            $nav-list:(
+               'logo':20px,
+               'mac':31px,
+               'ipad':30px,
+               'iphone':48px,
+               'watch':44px,
+               'tv':20px,
+               'music':40px,
+               'support':57px,
+               'search':20px,
+               'bag':18px,
+            );
+            @each $key in map_keys($nav-list){
+                .#{$key} a{
+                    width:map_get($nav-list,$key);
+                    background:url(../images/#{$key}.svg)no-repeat center center;
+                    &:hover{
+                        opacity: 0.65;
+                    }
+                }
+            }
+            li{
+                height:45px;
+                display:inline-block;  //可以设置行内块元素的浮动
+                line-height:45px;
+                z-index: 101;
+                a{
+                    display:inline-block;
+                    padding:0 10px;
+                    height: 45px;
+                    span{
+                        line-height: 0;
+                        height: 0;
+                        width:0;
+                        font-size:0;
+                    }
+                }
+            }
+            &::after{
+                content:'';
+                width:100%;
+                line-height: 0;
+                height:0;
+                display:inline-block;
+            }
+            .bag.close a{
+                background:url("../images/11.jpg")no-repeat center center;            
+               
+            }
+        }
+        .text{
+            width:600px;
+            height: 45px;
+            box-sizing:border-box;
+            @include zuoyou;
+            top:0;
+            z-index: 1000;
+            transition:all .4s ease;
+            transform: translateX(2000px);
+            span{
+                display:block;
+                @include cube(45px);
+                float:left;
+                background:url(../images/search.svg)no-repeat center center;
+            }
+            input{
+                width:500px;
+                height: 45px;
+                color: #fff;
+                font-size:101;
+                border:none;
+                outline:medium;
+                font-family: zitizhengc;
+                font-size: 18px;  
+                background: none;              
+            }
+            .xiala{
+                position:relative;
+                z-index: 11000;
+                width:100%;
+                height:0;
+                background:#fff;
+                font-size: 14px;
+                font-family: "ziti-jixi";
+                color:#acacac;
+            
+                transition:all .8s ease;
+                p{
+                    transition:all .5s ease;
+                    width:100%;
+                    padding: 0px 10px;
+                        box-sizing: border-box;
+                    animation:pao .8s ease .5s forwards;
+                    opacity: 0;
+                }
+                li{
+                    transition:all .5s ease;
+                    width:100%;
+                    box-sizing: border-box;
+                    font-family: "zitizhengc";
+                    font-size:16px;
+                    opacity: 0;
+                    a{
+                    display:block;
+                    padding: 6px 30px;
+                    color:#acacac;
+                    &:hover{
+                        background:#f2f2f2;
+                        color:#0188cc;
+                    }
+                }                    
+                }
+                @keyframes pao{
+                    0%{
+                        transform:translateX(100px);
+                        opacity:0;
+                    }
+                    100%{
+                        transform: translateX(0);
+                        opacity:1;
+                    }
+                }
+                p{
+                    animation: pao .4s ease 1.4s forwards;
+                }
+                li:nth-of-type(1){
+                    animation: pao .4s ease 1.6s forwards;
+                }
+                li:nth-of-type(2){
+                    animation: pao .4s ease 1.8s forwards;
+                }
+                li:nth-of-type(3){
+                    animation: pao .4s ease 2s forwards;
+                }
+                li:nth-of-type(4){
+                    animation: pao .4s ease 2.2s forwards;
+                }
+                li:nth-of-type(5){
+                    animation: pao .4s ease 2.4s forwards;
+                }
+                
+            }
+        }
+        .zhezhao{
+            width:30000px;
+            height: 1000px;
+            background: rgba(0,0,0,0.4);
+            position:absolute;
+            top:45px;
+            z-index: 999;
+            left: -1000px;
+            display: none;
+            @include ons{
+                height: 0;  
+            }
+        }
+        .text.active{
+            display: block;
+            transform: translateX(0);
+            .xiala{
+                height: 230px;
+                padding: 20px 20px;
+                box-sizing: border-box;
+                transition:all .4s ease .4s;
+            }
+        }
+        //小屏下的导航
+        .nav-phone{
+            dispaly:none;
+            padding:0 10px;
+            .menu{
+                a{
+                    display:black;
+                    @include cube(48px);
+                    @include shangxia;
+                    left:0;
+                    margin: 0;
+                    &:hover{
+                        opacity: 0.65;
+                    }
+                }
+                .hang,.shu{
+                    transition:all .6s ease;
+                    width:17px;
+                    height: 1px;
+                    background:#fff;
+                }
+                $size:20px;
+                .hang{
+                    @include zuoyou;
+                    top:$size;
+                }
+                .shu{
+                    @include zuoyou;                    
+                    bottom:$size;
+                }
+            }
+            .menu.bian{
+                .hang{
+                    @include zhong;
+                    transform:rotateZ(45deg);//旋转45度
+                }
+                .shu{
+                    @include zhong;
+                    transform:rotateZ(-45deg);//旋转-45度；
+                }
+            }
+            .logo{
+                a{
+                   @include cube(48px);
+                   background:url(../images/logo.svg)no-repeat center center;
+                   @include zuoyou;
+                   &:hover{
+                       opacity: 0.65;
+                   }            
+                }
+            }
+            .bag{
+                a{
+                    @include cube(48px);
+                    background:url(../images/bag.svg)no-repeat center center;
+                    @include shangxia;
+                    right:0;
+                    margin: 0;
+                    &:hover{
+                        opacity: 0.65;
+                    }
+                }
+            }
+        }
+    }
+}
+@include ons{
+    .header{
+        height:48px;
+        border-top:1px solid #B6B4B6;
+        .header-inner{
+            height: 48px;
+            border-top:1px solid #b6b4b6;
+            background: #333333;
+            .nav{
+                display:none;
+            }
+            .nav-phone{
+                display: block;
+            }
+            .text.active{
+                display:none;
+            }
+        }
+    }
+    .header-left{
+        width:100%;
+        height:1000px;
+        background:#333333;
+        display:none;
+        z-index: 111;
+        
+        padding: 55px 0;
+        position:absolute;
+        top:48px;
+        li{
+            transition:all .8s ease;
+            padding:0 60px;
+            opacity:0;
+            span{
+                display:block;
+                width:100%;
+                height:100%;
+                padding:15px 0;
+                color:#fff;
+                font-family:zitizhengc;
+                border-bottom:1px solid #fff;
+                font-size:22px;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+            a{
+                padding:15px 0;
+                border-bottom:1px solid #333;
+                width:100%;
+                height: 100%;
+                display:block;
+                color:#FFF;
+                font-family:zitixi;
+                font-size:20xp;
+                &:hover{
+                    opacity:0.8;
+                }
+            }
+        }
+        li:nth-child(1){
+            animation:xia .8s ease .2s forwards;
+        }
+        li:nth-child(2){
+            animation:xia .8s ease .3s forwards;
+        }   
+        li:nth-child(3){
+            animation:xia .8s ease .4s forwards;
+        } 
+        li:nth-child(4){
+            animation:xia .8s ease .5s forwards;
+        }
+        li:nth-child(5){
+            animation:xia .8s ease .6s forwards;
+        }
+        li:nth-child(6){
+            animation:xia .8s ease .7s forwards;
+        }
+        li:nth-child(7){
+            animation:xia .8s ease .8s forwards;
+        }                        
+        li:nth-child(8){
+            animation:xia .8s ease .9s forwards;
+        }                            
+    }
+}
+@keyframes xia{
+    0%{
+        transform:translateY(-1000px);
+        opacity:0;
+    }
+    100%{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+@media screen and (min-width:$small-size){
+    .header-left{
+        opacity:0;
+        height:0;
+        display: none;         
+    }
+}
+
+//banner
+.banner{
+    width:100%;
+    height:606px;
+    background:white;
+    position:relative;
+    overflow-x:hidden;
+    overflow-y:hidden ;
+    @include ons{
+       height:508px;
+    }
+    .zuo{
+        display:none;
+        cursor:pointer;
+        width:65px;
+        height: 112px;
+        background:url("../images/zuo.jpg")no-repeat;
+        z-index: 10;
+        @include shangxia;
+        left: 20px;
+    }
+    .you{
+        display:none;
+        cursor:pointer;
+         width:65px;
+         height:112px;
+         background: url("../images/you.jpg")no-repeat;  
+         z-index: 10;
+         @include shangxia;
+         right:20px;     
+    }
+    .lunbo{
+        width:100%;
+        height:650px;
+        poposition: absolute;
+        cursor:pointer;
+        
+        .lei{
+            display: block;
+            transform: translateX(0);
+        }
+        .left{
+            display: block;
+            transform:translateX(-100%);
+        }
+        .right{
+            display: block;
+            transform: translate(100%);
+        }        
+        
+        @include ons{
+            height: 508px;
+        }
+
+        li{
+            width:100%;
+            height:100%;
+            position:absolute; 
+            display: none;   
+            transition:transform .6s ease;
+
+            a{
+                display:block;
+                width:100%;height:100%;
+                color:#333;
+            }            
+        }
+        li:nth-child(1){
+            a{
+                background:url("../images/iphone_6s_medium.jpg")no-repeat center 74%;
+                @include ons{
+                background: url("../images/iphone_6s_xiao.jpg")no-repeat center 67%;
+                    
+                }
+            }
+        
+        .iphonebox{
+            width:100%;
+            height:260px;
+            text-align:center;
+            font-family:zitixi;
+            font-size:30px;
+            position: absolute;
+            top:0;
+            left:0;             
+            @include ons{
+                height:320px;
+                font-size:24px;
+                top:60px;
+            }
+            p{
+                display: block;
+                @include zuoyou;
+                top:100px;
+                width:205px;
+                height: 40px;
+                background:url("../images/iphone_6s_medium.png")no-repeat center center;
+                @include ons{
+                    width:166px;
+                    height:31px;
+                    @include zuoyou;
+                    top:60px;
+                    background:url("../images/iphone_6s_small.png")no-repeat 50% 50%;              
+                }
+            }
+            span{
+                line-height:345px;
+                @include ons{
+                    display:block;
+                    width:280px;
+                    height:100px;
+                    line-height: 30px;
+                    @include zuoyou;
+                    top:105px; 
+                }
+            }
+          }
+        }
+li:nth-child(2){
+        a{
+            background: url("../images/ipad_pro_da.jpg")no-repeat 50% 150%;
+            @include ons{
+            background: url("../images/ipad_pro_xiao.jpg")no-repeat 50% 62%;
+            }
+        }
+        .ipadbox{
+            width:100%;
+            height:260px;
+            text-align:center;
+            font-family: zitixi;
+            font-size:30px;
+            position: absolute;
+            top:0;
+            left:0;                        
+            @include ons{
+                height: 320px;
+                font-size: 24px;
+                top:60px;
+            }
+            p{
+                @include zuoyou;
+                top:25px;
+                width:205px;
+                height:40px;
+                font-size: 36px;
+                color:#333;
+                font-family:zitizhengc;
+                @include ons{
+                    width:166px;
+                    height:31px;
+                    @include zuoyou;
+                }
+            }
+            span{
+                line-height: 250px;
+                @include ons{
+                    display: block;
+                    width:280px;
+                    height: 100px;
+                    line-height: 30px;
+                    @include zuoyou;
+                    top:70px;
+                }
+            }
+        }
+    }
+    li:nth-child(3){
+        a{
+           background: url("../images/apple_watch_trio_da.jpg")no-repeat 50% 50%;
+           @include ons{
+               background: url("../images/apple_watch_trio_xiao.jpg")no-repeat 50% 55%;
+           }
+        }
+        .watchbox{
+            width:100%;
+            height:260px;
+            text-align:center;
+            font-family: zitixi;
+            font-size:30px;
+            position: absolute;
+            top:0;
+            left:0;            
+            @include ons{
+                height:320px;
+                font-size:20px;
+                top:60px;
+            }
+            p{
+                @include zuoyou;
+                top:65px;
+                width:205px;
+                height:40px;
+                background: url("../images/apple_watch_medium.png")no-repeat;
+                @include ons{
+                    width:166px;
+                    height:31px;
+                    @include zuoyou;
+                    bottom:300px;                    
+                    background: url("../images/apple_watch_small.png")no-repeat;
+                }
+            }
+            span{
+                line-height: 290px;
+                display: block;
+                font-size: 36px;
+                @include ons{
+                    display:block;
+                    width:280px;
+                    height:100px;
+                    line-height:30px;
+                    @include zuoyou;
+                    top:80px;
+                }
+            }
+        }
+    }
+    li:nth-child(4){
+        a{
+           background: url("../images/macbook_da.png")no-repeat 50% 50%;
+           @include ons{
+               background: url("../images/macbook_small.png")no-repeat 50% 55%;
+           }
+        }
+        .macbox{
+            width:100%;
+            height:260px;
+            text-align:center;
+            font-family: zitixi;
+            font-size:40px;
+            position: absolute;
+            top:0;
+            left:0;          
+            @include ons{
+                height:320px;
+                font-size:30px;
+                top:60px;
+            }
+            p{
+                @include zuoyou;
+                top:65px;
+                width:205px;
+                height:40px;
+                @include ons{
+                    width:166px;
+                    height:31px;
+                    @include zuoyou;
+                    bottom:300px;                    
+                }
+            }
+            span{
+                line-height: 290px;
+                display: block;
+                font-size: 28px;
+                @include ons{
+                    display:block;
+                    width:280px;
+                    font-size: 24px;
+                    height:100px;
+                    line-height:30px;
+                    @include zuoyou;
+                    top:80px;
+                }
+            }
+        }
+    }
+    &::after{
+        content: "";
+        clear:both;
+    }          
+        
+   }
+   .point{
+       @include zuoyou;
+       bottom:10px;
+       width:114px;
+       height:8px;
+       li{
+           @include cube(8px);
+           border-radius:50%;
+            margin:0 10px;
+           float:left;
+           background: #999;
+       }
+       li.yangshi{
+           box-shadow:0 0 0 2px blue;
+           background:#fff;
+           transform:tanslateY(-1px);
+           
+           
+       }
+       
+   }
+    
+}
+
+
+//展示区
+
+.list{
+      width: 100%;   
+     height: 200px;
+     ul{
+        width: 100%;
+        height: 200px;
+        cursor: pointer;
+     }
+
+     .col{
+        border:1px solid #fff;
+        box-sizing:border-box;
+        height: 200px;
+     }
+       .col.tv{
+        background: url(../images/2Q==.jpg)no-repeat center center;
+       @include ons{
+        background: url(../images/apple_tv_small.jpg)no-repeat center center;
+       }
+       }
+
+       .col.ios{
+        background:url(../images/public_betas_medium.jpg)no-repeat center center;
+        @include ons{
+            background:url(../images/public_betas_small.jpg)no-repeat center center;
+        }
+       }
+
+       .col.swift{
+        background: url(../images/swift_playground_medium.jpg)no-repeat center center;
+        @include ons{
+            background: url(../images/swift_playground_small.jpg)no-repeat center center;
+        }
+       }
+
+       .col.gift{
+        background: url(../images/bts_iphone_medium.jpg)no-repeat center center;
+        @include ons{
+            background: url(../images/bts_iphone_small.jpg)no-repeat center center;
+        }
+       }    
+}
+
+
+//footer
+
+.footer{
+    width:100%;
+    height: 368PX;
+    padding:15px 5%;
+    border-top:1px solid #fff;
+    box-sizing:border-box;
+    background:#f2f2f2;
+    @media screen and (max-width:900px){
+        height: 338px;
+    }
+    .footerbox{
+        width:100%;
+        height: 100%;
+        padding:0 8%;
+        box-sizing:border-box;
+        .listbox{
+            width:100%;height:82%;
+            padding:15px 0;
+            box-sizing:border-box;
+            &::after{
+                content:'';
+                clear:both;
+            }
+            ul{
+                width:20%;
+                height: 70%;
+                float:left;
+               span{
+                   font-fmaily:"zitijiacu";
+                   font-size: 12px;
+                   color:#333;
+               }
+               li{
+                   font-family: "zitizhengc";
+                   font-size:12px;
+                   color:#666;
+                   padding: 3px 0;
+                   cursor:pointer;
+                   &:hover{
+                       color:#333333;
+                       text-decoration: underline;
+                   }
+                   
+               }
+            }
+        }
+        .lianjie{
+            width: 100%;
+            height: 18%;
+            .lianjie1{
+                width:100%;
+                height: 50%;
+                li{
+                    border-bottom:1px solid #e3e3e3;
+                    padding: 7px 0;
+                    box-sizing:border-box;
+                    color:#999;
+                    font-size: 12px;
+                    font-family: "zitizhengc";
+                    a{
+                        font-family: "zitizhengc";
+                        font-size: 12px;
+                        color:#0088cc;
+                        &:hover{
+                            color:#333;
+                            text-decoration:underline;
+                        }                        
+                    }
+                }
+            }
+            .lianjie2{
+                width:100%;
+                height:50%;
+                @media screen and (max-width:900px){
+                    height:70%;
+                    li:nth-child(2){
+                        clear:both;
+                    }
+                }
+                li{
+                    color: #999;
+                    font-size:12px;
+                    font-family: "zitizhengc";
+                    float:left;
+                    padding:7px 0;
+                    box-sizing:border-box;
+                    a{
+                        margin-left:10px;
+                        color:#666;
+                        font-size: 12px;
+                        font-family: "zitizhengc";
+                        &:hover{
+                            color:#333;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                
+                .guoqi{
+                      width: auto;
+                      height:auto;
+                      padding: 7px 0;
+                      box-sizing: border-box;
+                      float: right;
+                      span{
+                           a{
+                margin: 2%;
+                color: #666;
+                font-size: 12px;
+                font-family: "zitizhengc";
+                &:hover{
+                  color: #333;
+                  text-decoration: underline;
+                }
+              }
+            }
+
+
+          }                
+            }
+        }
+    }
+}
+
+.dbxy{
+    width:100%;
+    height:auto;
+    padding:5% 5%;
+    box-sizing:border-box;
+
+    display:none;
+    .lie.chuxian{
+        transition:all .5s ease;
+        height:auto;
+    }
+    .lie{
+        border-bottom:1px solid #e3e3e3;
+        position:relative;
+    cursor:pointer;
+        
+        width:100%;
+        height:40px;
+        overflow:hidden;
+        transition:all 1s ease;
+        span{
+            display:block;
+            font-family: "zitizhengc";
+            font-size:14px;
+            color:#333;
+            line-height:40px;            
+        }
+        li{
+            line-height:30px;
+            font-family: "zitixi";
+            font-size: 10px;
+            color:#666;
+            &:hover{
+                text-decoration:underline;
+            }
+        }
+        .xyclose{
+            display:block;
+            width:30px;
+            height:30px;
+            background:url("../images/jia.jpg")no-repeat center center;
+            float:right;
+            position:absolute;
+            top:0;
+            right:0;
+            transition:all .6s ease;            
+        }
+        .xyclose.chazhuan{
+            transform:rotateZ(45deg);
+        }
+    }
+    .xylianjie{
+        width:100%;
+        height:auto;
+        ul{
+            border:none;
+            li{
+                height:50px;
+                line-height:50px;
+                font-size:12px;
+                color: #666;
+                font-family: "zitixi";
+            }
+            a{
+                font-size: 10px;
+                color:#666;
+                font-family: "zitizhengc";
+                &:hover{
+                    text-decoration:underline;
+                }
+            }
+        }
+        .guoqi{
+            width:100%;
+            height:auto;
+            padding-bottom:20px;
+            span{
+                margin-left: 1%;
+                font-size:12px;
+                color:#666;
+                font-family: "zitizhengc";
+            }
+        }
+        .disp{
+            width:100%;
+            height: auto;
+            span{
+                color:#999;
+                font-family: "zitizhengc";
+                font-size: 12px;
+            }
+        }
+        .last{
+            width:100%;
+            height:auto;
+            ul{
+                width:100%;
+                text-align:justify;
+            }
+            .zzhh{
+                height:auto;
+                line-height:20px;
+                font-family: "zitixi";
+                float:left;
+                font-size: 15px;
+                a{
+                    font-size:10px;
+                    color:#666;
+                    font-family: "zitizhengc";
+                    margin: 0 10px;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+            .dagezi{
+                display:inline-block;
+                width:100%;
+                height:1px;
+                display:none;
+            }
+        }
+    }
+}
+  .shangdezuihou.shangzh1{
+    z-index: 10000;
+}
+@include ons{
+    .footer{
+        display:none;
+    }
+    .dbxy{
+        display:block;
+    }
+}
